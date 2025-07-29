@@ -55,10 +55,16 @@ local UpdateButton = Tab2:CreateButton({
 		Rayfield:Destroy()
 	end,
 })
-local  infiniteYield= Tab2:CreateButton({
+local  infiniteYield = Tab2:CreateButton({
 	Name = "Infinite Yield",
 	Callback = function()
 		loadstring(game:HttpGet('https://raw.githubusercontent.com/DarkNetworks/Infinite-Yield/main/latest.lua'))()
+	end,
+})
+local test = Tab2:CreateButton({
+	Name = "hmmm",
+	Callback = function()
+		
 	end,
 })
 local Tab = Window:CreateTab("Grow A Garden", "activity-square")
