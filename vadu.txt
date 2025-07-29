@@ -55,6 +55,17 @@ local UpdateButton = Tab2:CreateButton({
 		Rayfield:Destroy()
 	end,
 })
+local function getHeldItem()
+	if plr.Character then
+		-- We're looking for a Tool instance that's a direct child of the character
+		for _, child in ipairs(plr.Character:GetChildren()) do
+			if child:IsA("Tool") then
+				return child
+			end
+		end
+	end
+	return nil -- No tool found
+end
 local  infiniteYield = Tab2:CreateButton({
 	Name = "Infinite Yield",
 	Callback = function()
@@ -151,5 +162,19 @@ local GiveShecklesButton = Tab:CreateButton({
 	Callback = function()
 		plr:WaitForChild("leaderstats"):WaitForChild("Sheckles").Value = sheckles
 		plr:WaitForChild("PlayerGui"):WaitForChild("Sheckles_UI"):WaitForChild("TextLabel"):WaitForChild("val").Value = sheckles
+	end,
+})
+
+local DupeButton = Tab:CreateButton({
+	Name = "Dupe",
+	Callback = function()
+		local held = getHeldItem()
+		if held.Name:lower():find("Seed") ~= nil then
+			held:SetAttribute("Quantity", held:GetAttribute("Quantity") + 1)
+		else
+			local neww = held:Clone()
+			neww.Parent = plr.Backpack
+		end
+		
 	end,
 })
