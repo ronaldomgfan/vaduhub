@@ -80,7 +80,6 @@ local QuickSeedBuyButton = Tab:CreateButton({
 		Events:WaitForChild("BuySeedStock"):FireServer(seedbuy)
 	end,
 })
-local divide = Rayfield:CreateDivider()
 local gearbuy = "Basic Sprinkler"
 local QuickGearBuyInput = Tab:CreateInput({
 	Name = "Quick Gear Buy",
