@@ -73,9 +73,9 @@ local  infiniteYield = Tab2:CreateButton({
 	end,
 })
 local test = Tab2:CreateButton({
-	Name = "hmmm",
+	Name = "Close",
 	Callback = function()
-		
+		Rayfield:Destroy()
 	end,
 })
 local Tab = Window:CreateTab("Grow A Garden", "activity-square")
