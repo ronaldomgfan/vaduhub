@@ -2,6 +2,7 @@ local Rep = game:GetService("ReplicatedStorage")
 local Events = Rep:WaitForChild("GameEvents")
 local plrs = game:GetService("Players")
 local plr = plrs.LocalPlayer
+local HttpService = game:GetService("HttpService")
 
 
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
@@ -169,11 +170,12 @@ local DupeButton = Tab:CreateButton({
 	Name = "Dupe",
 	Callback = function()
 		local held = getHeldItem()
-		if held.Name:lower():find("Seed") ~= nil then
+		if held.Name:lower():find("seed") ~= nil then
 			held:SetAttribute("Quantity", held:GetAttribute("Quantity") + 1)
 		else
 			local neww = held:Clone()
 			neww.Parent = plr.Backpack
+			neww:SetAttribute("UUID", HttpService:GenerateGUID(true))
 		end
 		
 	end,
