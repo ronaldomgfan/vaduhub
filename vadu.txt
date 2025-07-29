@@ -74,7 +74,7 @@ local  infiniteYield = Tab2:CreateButton({
 	end,
 })
 local test = Tab2:CreateButton({
-	Name = "Close",
+	Name = "Close UPDATE: V2",
 	Callback = function()
 		Rayfield:Destroy()
 	end,
