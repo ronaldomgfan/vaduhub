@@ -2,11 +2,6 @@ local Rep = game:GetService("ReplicatedStorage")
 local Events = Rep:WaitForChild("GameEvents")
 local plrs = game:GetService("Players")
 local plr = plrs.LocalPlayer
-local MarketplaceService = game:GetService("MarketplaceService")
-local ServerScriptService = game:GetService("ServerScriptService")
-local ServerStorage = game:GetService("ServerStorage")
-local CurrencyService = require(ServerScriptService:WaitForChild("Modules"):WaitForChild("CurrencyService"))
-local InventoryService = require(ServerScriptService.Modules.InventoryService)
 
 
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
@@ -149,6 +144,7 @@ local ShecklesGiveInput = Tab:CreateInput({
 local GiveShecklesButton = Tab:CreateButton({
 	Name = "Give Sheckles",
 	Callback = function()
-		CurrencyService:Add(plr,"Sheckles", sheckles)
+		plr:WaitForChild("leaderstats"):WaitForChild("Sheckles").Value = sheckles
+		plr:WaitForChild("PlayerGui"):WaitForChild("Sheckles_UI"):WaitForChild("TextLabel"):WaitForChild("val").Value = sheckles
 	end,
 })
