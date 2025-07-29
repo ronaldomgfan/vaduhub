@@ -46,7 +46,15 @@ local Window = Rayfield:CreateWindow({
 		Key = {"Hello"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
 	}
 })
-local Tab = Window:CreateTab("Grow A Garden", "rewind")
+local Tab2 = Window:CreateTab("Home", "home")
+local QuickGearBuyButton = Tab2:CreateButton({
+	Name = "Update Script",
+	Callback = function()
+		loadstring(game:HttpGet('https://raw.githubusercontent.com/ronaldomgfan/vaduhub/refs/heads/main/vadu.txt'))()
+		Rayfield:Destroy()
+	end,
+})
+local Tab = Window:CreateTab("Grow A Garden", "activity-square")
 local Section = Tab:CreateSection("Buying")
 local seedbuy = "Carrot"
 local QuickSeedBuyInput = Tab:CreateInput({
@@ -63,5 +71,54 @@ local QuickSeedBuyButton = Tab:CreateButton({
 	Name = "Quick Seed Buy",
 	Callback = function()
 		Events:WaitForChild("BuySeedStock"):FireServer(seedbuy)
+	end,
+})
+local gearbuy = "Basic Sprinkler"
+local QuickGearBuyInput = Tab:CreateInput({
+	Name = "Quick Gear Buy",
+	CurrentValue = "",
+	PlaceholderText = "Basic Sprinkler",
+	RemoveTextAfterFocusLost = false,
+	Flag = "Input1",
+	Callback = function(Text)
+		gearbuy = Text
+	end,
+})
+local QuickGearBuyButton = Tab:CreateButton({
+	Name = "Quick Gear Buy",
+	Callback = function()
+		Events:WaitForChild("BuyGearStock"):FireServer(gearbuy)
+	end,
+})
+local Section = Tab:CreateSection("Selling")
+local QuickInventorySellButton = Tab:CreateButton({
+	Name = "Quick Inventory Sell",
+	Callback = function()
+		Events:WaitForChild("Sell_Inventory"):FireServer()
+	end,
+})
+local QuickItemSellButton = Tab:CreateButton({
+	Name = "Quick Item Sell",
+	Callback = function()
+		Events:WaitForChild("Sell_Item"):FireServer()
+	end,
+})
+local QuickPetSellButton = Tab:CreateButton({
+	Name = "Quick Pet Sell",
+	Callback = function()
+		Events:WaitForChild("SellPet_RE"):FireServer()
+	end,
+})
+local Section = Tab:CreateSection("Experimental")
+local BuyCandyBlossomButton = Tab:CreateButton({
+	Name = "Buy Candy Blossom",
+	Callback = function()
+		Events:WaitForChild("BuyEasterStock"):FireServer("Candy Blossom")
+	end,
+})
+local GiveTenChiButton = Tab:CreateButton({
+	Name = "Give 10 Chi",
+	Callback = function()
+		Events:WaitForChild("ChannelChi"):FireServer(10)
 	end,
 })
