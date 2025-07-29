@@ -47,11 +47,17 @@ local Window = Rayfield:CreateWindow({
 	}
 })
 local Tab2 = Window:CreateTab("Home", "home")
-local QuickGearBuyButton = Tab2:CreateButton({
+local UpdateButton = Tab2:CreateButton({
 	Name = "Update Script",
 	Callback = function()
 		loadstring(game:HttpGet('https://raw.githubusercontent.com/ronaldomgfan/vaduhub/refs/heads/main/vadu.txt'))()
 		Rayfield:Destroy()
+	end,
+})
+local  infiniteYield= Tab2:CreateButton({
+	Name = "Infinite Yield",
+	Callback = function()
+		loadstring(game:HttpGet('https://raw.githubusercontent.com/DarkNetworks/Infinite-Yield/main/latest.lua'))()
 	end,
 })
 local Tab = Window:CreateTab("Grow A Garden", "activity-square")
