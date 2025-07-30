@@ -241,6 +241,41 @@ if game.PlaceId == 126884695634066 then
 	})
 end
 
+local function EnableESP() 
+	local plrss = game.Players:GetPlayers()
+	for _, i in plrss do
+		if i.Character:WaitForChild("Highlight") == nil then
+			local highlight = Instance.new("Highlight")
+			highlight.Name = "Highlight"
+			highlight.Parent = i.Character
+			highlight.FillColor = i.TeamColor
+		end
+	end
+
+end
+
+local function DisableESP() 
+	local plrss = game.Players:GetPlayers()
+	for _, i in plrss do
+		if i.Character:WaitForChild("Highlight") == nil then
+
+		else
+			i.Character:WaitForChild("Highlight"):Destroy()
+
+		end
+	end
+
+end
+
+
+local function ESP(value: boolean)
+	if value == true then
+		EnableESP()
+	else
+		DisableESP()
+	end
+end
+
 local Tab3 = Rayfield:CreateTab("Arsenal","bone")
 local ESPToggle = Tab3:CreateToggle({
 	Name = "ESP",
@@ -264,40 +299,7 @@ local UpdateButton = Tab2:CreateButton({
 	end,
 })
 
-local function EnableESP() 
-	local plrss = game.Players:GetPlayers()
-	for _, i in plrss do
-		if i.Character:WaitForChild("Highlight") == nil then
-			local highlight = Instance.new("Highlight")
-			highlight.Name = "Highlight"
-			highlight.Parent = i.Character
-			highlight.FillColor = i.TeamColor
-		end
-	end
 
-end
-
-local function DisableESP() 
-	local plrss = game.Players:GetPlayers()
-	for _, i in plrss do
-		if i.Character:WaitForChild("Highlight") == nil then
-			
-		else
-			i.Character:WaitForChild("Highlight"):Destroy()
-			
-		end
-	end
-
-end
-
-
-local function ESP(value: boolean)
-	if value == true then
-		EnableESP()
-	else
-		DisableESP()
-	end
-end
 
 
 
