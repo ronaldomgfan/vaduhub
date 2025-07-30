@@ -1,7 +1,5 @@
 local Rep = game:GetService("ReplicatedStorage")
-if game.PlaceId == 126884695634066 then
-	local Events = Rep:WaitForChild("GameEvents")
-end
+
 
 local plrs = game:GetService("Players")
 local plr = plrs.LocalPlayer
@@ -112,6 +110,137 @@ local Window = Rayfield:CreateWindow({
 		Key = {"vadupaloasdsidks732"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
 	}
 })
+
+if game.PlaceId == 126884695634066 then
+	local Events = Rep:WaitForChild("GameEvents")
+	local Tab = Window:CreateTab("Grow A Garden", "activity-square")
+
+	local Section = Tab:CreateSection("Buying")
+
+	local QuickSeedBuyInput = Tab:CreateInput({
+		Name = "Quick Seed Buy",
+		CurrentValue = "",
+		PlaceholderText = "Carrot",
+		RemoveTextAfterFocusLost = false,
+		Flag = "Input1",
+		Callback = function(Text)
+			seedbuy = Text
+		end,
+	})
+
+	local SeedBuyToggle = Tab:CreateToggle({
+
+		Name = "Seed Buy",
+		CurrentValue = false,
+		Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+		Callback = function(Value)
+			while Value == true do
+				Events:WaitForChild("BuySeedStock"):FireServer(seedbuy)
+			end
+		end,
+	})
+
+	local QuickSeedBuyButton = Tab:CreateButton({
+		Name = "Quick Seed Buy",
+		Callback = function()
+			Events:WaitForChild("BuySeedStock"):FireServer(seedbuy)
+		end,
+	})
+
+	local QuickGearBuyInput = Tab:CreateInput({
+		Name = "Quick Gear Buy",
+		CurrentValue = "",
+		PlaceholderText = "Basic Sprinkler",
+		RemoveTextAfterFocusLost = false,
+		Flag = "Input1",
+		Callback = function(Text)
+			gearbuy = Text
+		end,
+	})
+
+	local QuickGearBuyButton = Tab:CreateButton({
+		Name = "Quick Gear Buy",
+		Callback = function()
+			Events:WaitForChild("BuyGearStock"):FireServer(gearbuy)
+		end,
+	})
+
+	local Section = Tab:CreateSection("Selling")
+
+	local QuickInventorySellButton = Tab:CreateButton({
+		Name = "Quick Inventory Sell",
+		Callback = function()
+			Events:WaitForChild("Sell_Inventory"):FireServer()
+		end,
+	})
+
+	local QuickItemSellButton = Tab:CreateButton({
+		Name = "Quick Item Sell",
+		Callback = function()
+			Events:WaitForChild("Sell_Item"):FireServer()
+		end,
+	})
+
+	local QuickPetSellButton = Tab:CreateButton({
+		Name = "Quick Pet Sell",
+		Callback = function()
+			Events:WaitForChild("SellPet_RE"):FireServer()
+		end,
+	})
+
+	local Section = Tab:CreateSection("Experimental")
+
+	local BuyCandyBlossomButton = Tab:CreateButton({
+		Name = "Buy Candy Blossom",
+		Callback = function()
+			Events:WaitForChild("BuyEasterStock"):FireServer("Candy Blossom")
+		end,
+	})
+
+	local GiveTenChiButton = Tab:CreateButton({
+		Name = "Give 10 Chi",
+		Callback = function()
+			Events:WaitForChild("ChannelChi"):FireServer(10)
+		end,
+	})
+
+	local ShecklesGiveInput = Tab:CreateInput({
+		Name = "Sheckles",
+		CurrentValue = "",
+		PlaceholderText = "100",
+		RemoveTextAfterFocusLost = false,
+		Flag = "Input1",
+		Callback = function(Text)
+			sheckles = Text
+		end,
+	})
+
+	local GiveShecklesButton = Tab:CreateButton({
+		Name = "Give Sheckles",
+		Callback = function()
+			plr:WaitForChild("leaderstats"):WaitForChild("Sheckles").Value = sheckles
+			plr:WaitForChild("PlayerGui"):WaitForChild("Sheckles_UI"):WaitForChild("TextLabel"):WaitForChild("val").Value = sheckles
+		end,
+	})
+
+	local DupeButton = Tab:CreateButton({
+		Name = "Dupe",
+		Callback = function()
+			local held = getHeldItem()
+			if held.Name:lower():find("seed") ~= nil then
+				held:SetAttribute("Quantity", held:GetAttribute("Quantity") + 1)
+				held.Name = held:GetAttribute("Seed") + " X" + held:GetAttribute("Quantity")
+			else
+				local neww = held:Clone()
+				neww.Parent = plr.Backpack
+
+
+			end
+
+		end,
+	})
+end
+
 local Tab2 = Window:CreateTab("Home", "home")
 local UpdateButton = Tab2:CreateButton({
 	Name = "Update Script",
@@ -174,132 +303,7 @@ local test = Tab2:CreateButton({
 })
 
 
-local Tab = Window:CreateTab("Grow A Garden", "activity-square")
 
-local Section = Tab:CreateSection("Buying")
-
-local QuickSeedBuyInput = Tab:CreateInput({
-	Name = "Quick Seed Buy",
-	CurrentValue = "",
-	PlaceholderText = "Carrot",
-	RemoveTextAfterFocusLost = false,
-	Flag = "Input1",
-	Callback = function(Text)
-		seedbuy = Text
-	end,
-})
-
-local SeedBuyToggle = Tab:CreateToggle({
-	
-	Name = "Seed Buy",
-	CurrentValue = false,
-	Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-	Callback = function(Value)
-		while Value == true do
-			Events:WaitForChild("BuySeedStock"):FireServer(seedbuy)
-		end
-	end,
-})
-
-local QuickSeedBuyButton = Tab:CreateButton({
-	Name = "Quick Seed Buy",
-	Callback = function()
-		Events:WaitForChild("BuySeedStock"):FireServer(seedbuy)
-	end,
-})
-
-local QuickGearBuyInput = Tab:CreateInput({
-	Name = "Quick Gear Buy",
-	CurrentValue = "",
-	PlaceholderText = "Basic Sprinkler",
-	RemoveTextAfterFocusLost = false,
-	Flag = "Input1",
-	Callback = function(Text)
-		gearbuy = Text
-	end,
-})
-
-local QuickGearBuyButton = Tab:CreateButton({
-	Name = "Quick Gear Buy",
-	Callback = function()
-		Events:WaitForChild("BuyGearStock"):FireServer(gearbuy)
-	end,
-})
-
-local Section = Tab:CreateSection("Selling")
-
-local QuickInventorySellButton = Tab:CreateButton({
-	Name = "Quick Inventory Sell",
-	Callback = function()
-		Events:WaitForChild("Sell_Inventory"):FireServer()
-	end,
-})
-
-local QuickItemSellButton = Tab:CreateButton({
-	Name = "Quick Item Sell",
-	Callback = function()
-		Events:WaitForChild("Sell_Item"):FireServer()
-	end,
-})
-
-local QuickPetSellButton = Tab:CreateButton({
-	Name = "Quick Pet Sell",
-	Callback = function()
-		Events:WaitForChild("SellPet_RE"):FireServer()
-	end,
-})
-
-local Section = Tab:CreateSection("Experimental")
-
-local BuyCandyBlossomButton = Tab:CreateButton({
-	Name = "Buy Candy Blossom",
-	Callback = function()
-		Events:WaitForChild("BuyEasterStock"):FireServer("Candy Blossom")
-	end,
-})
-
-local GiveTenChiButton = Tab:CreateButton({
-	Name = "Give 10 Chi",
-	Callback = function()
-		Events:WaitForChild("ChannelChi"):FireServer(10)
-	end,
-})
-
-local ShecklesGiveInput = Tab:CreateInput({
-	Name = "Sheckles",
-	CurrentValue = "",
-	PlaceholderText = "100",
-	RemoveTextAfterFocusLost = false,
-	Flag = "Input1",
-	Callback = function(Text)
-		sheckles = Text
-	end,
-})
-
-local GiveShecklesButton = Tab:CreateButton({
-	Name = "Give Sheckles",
-	Callback = function()
-		plr:WaitForChild("leaderstats"):WaitForChild("Sheckles").Value = sheckles
-		plr:WaitForChild("PlayerGui"):WaitForChild("Sheckles_UI"):WaitForChild("TextLabel"):WaitForChild("val").Value = sheckles
-	end,
-})
-
-local DupeButton = Tab:CreateButton({
-	Name = "Dupe",
-	Callback = function()
-		local held = getHeldItem()
-		if held.Name:lower():find("seed") ~= nil then
-			held:SetAttribute("Quantity", held:GetAttribute("Quantity") + 1)
-			held.Name = held:GetAttribute("Seed") + " X" + held:GetAttribute("Quantity")
-		else
-			local neww = held:Clone()
-			neww.Parent = plr.Backpack
-			
-			
-		end
-		
-	end,
-})
 
 
 local Tab3 = Rayfield:CreateTab("Arsenal","bone")
