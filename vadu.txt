@@ -2,11 +2,6 @@ local Rep = game:GetService("ReplicatedStorage")
 local Events = Rep:WaitForChild("GameEvents")
 local plrs = game:GetService("Players")
 local plr = plrs.LocalPlayer
-local HttpService = game:GetService("HttpService")
-local Workspace = game:GetService("Workspace")
-local TweenService = game:GetService("TweenService")
-local UserInputService = game:GetService("UserInputService")
-local RunService = game:GetService("RunService")
 
 local aimbot = false
 local seedbuy = "Carrot"
