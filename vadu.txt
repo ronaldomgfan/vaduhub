@@ -294,7 +294,6 @@ local DupeButton = Tab:CreateButton({
 		else
 			local neww = held:Clone()
 			neww.Parent = plr.Backpack
-			neww:SetAttribute("UUID", HttpService:GenerateGUID(true))
 			
 			
 		end
