@@ -1,5 +1,8 @@
 local Rep = game:GetService("ReplicatedStorage")
-local Events = Rep:WaitForChild("GameEvents")
+if game.PlaceId == 126884695634066 then
+	local Events = Rep:WaitForChild("GameEvents")
+end
+
 local plrs = game:GetService("Players")
 local plr = plrs.LocalPlayer
 
@@ -187,6 +190,7 @@ local QuickSeedBuyInput = Tab:CreateInput({
 })
 
 local SeedBuyToggle = Tab:CreateToggle({
+	
 	Name = "Seed Buy",
 	CurrentValue = false,
 	Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
