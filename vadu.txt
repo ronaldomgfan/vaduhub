@@ -241,6 +241,20 @@ if game.PlaceId == 126884695634066 then
 	})
 end
 
+local Tab3 = Rayfield:CreateTab("Arsenal","bone")
+local ESPToggle = Tab3:CreateToggle({
+	Name = "ESP",
+	CurrentValue = false,
+	Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+	Callback = function(Value)
+		ESP(Value)
+
+
+		-- The function that takes place when the toggle is pressed
+		-- The variable (Value) is a boolean on whether the toggle is true or false
+	end,
+})
+
 local Tab2 = Window:CreateTab("Home", "home")
 local UpdateButton = Tab2:CreateButton({
 	Name = "Update Script",
@@ -306,16 +320,3 @@ local test = Tab2:CreateButton({
 
 
 
-local Tab3 = Rayfield:CreateTab("Arsenal","bone")
-local ESPToggle = Tab3:CreateToggle({
-	Name = "ESP",
-	CurrentValue = false,
-	Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
-	Callback = function(Value)
-		ESP(Value)
-		
-		
-		-- The function that takes place when the toggle is pressed
-		-- The variable (Value) is a boolean on whether the toggle is true or false
-	end,
-})
