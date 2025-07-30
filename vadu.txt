@@ -276,7 +276,7 @@ local function ESP(value: boolean)
 	end
 end
 
-local Tab3 = Rayfield:CreateTab("Arsenal","bone")
+local Tab3 = Rayfield:CreateTab("Arsenal")
 local ESPToggle = Tab3:CreateToggle({
 	Name = "ESP",
 	CurrentValue = false,
